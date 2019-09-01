@@ -7,11 +7,11 @@ import base64
 from io import BytesIO
 from PIL import Image
 import cv2
- 
+import math
 sio = socketio.Server()
  
 app = Flask(__name__) #'__main__'
-speed_limit = 10
+speed_limit = 20
 def img_preprocess(img):
     img = img[60:135,:,:]
     img = cv2.cvtColor(img, cv2.COLOR_RGB2YUV)
@@ -30,7 +30,13 @@ def telemetry(sid, data):
     image = np.array([image])
     steering_angle = float(model.predict(image))
     throttle = 1.0 - speed/speed_limit
-    print('{} {} {}'.format(steering_angle, throttle, speed))
+    if math.fabs(steering_angle) < 0.01:
+        move='Straight'
+    elif steering_angle<0:
+        move='Left'
+    else:
+        move='Right'
+    print('Steering: {0:.4f}\tThrottle: {1:.4f}\tSpeed:{2:.4f}\t'.format(steering_angle, throttle, speed) + "Move: "+move)
     send_control(steering_angle, throttle)
  
  
