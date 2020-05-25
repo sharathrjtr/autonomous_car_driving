@@ -101,9 +101,9 @@ Batch generator functions is defined to generate the required number of training
 --------------------------------------
 **Training Process**
 - Model is trained for 10 epochs with 300 training steps per epoch followed by 200 validation steps. 
-- Each training batch consists of 100 training images.
+- Each training step consists of a batch of 100 training images.
 - Each validation step consists of 100 validation images. 
-- Required around 25 mins of training time.
+- Requires around 25 mins of training time.
 
 ![training result](images/training_fit_gen.png)
 
@@ -132,4 +132,5 @@ $ ./Default\ Linux\ desktop\ Universal.x86_64
 
 --------------------------------------
 **Watch Autonomous Drive Video on Both Tracks**
+
 [![Watch the video](images/autonomous_driving2.png)](https://youtu.be/ozstXJIiAoA)
