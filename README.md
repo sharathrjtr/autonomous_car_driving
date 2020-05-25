@@ -63,13 +63,14 @@ Preprocessing of images is carried out by
 - converting the image from RGB to YUV color space
 - applying gaussian blur operation to smoothen the image
 - Normalize the pixel values to range of 0-1
+
 Experimental results on other machine vision applications show that YUV color space provide better results compared to RGB color space due to its perceptual similarities to
 the human vision. Hence, I've trained the model with YUV images.
 ![preprocessing](images/preprocess_image.png)
 
 Batch generator functions is defined to generate the required number of training/validation samples for each batch. 
-For training batch - random augmentation procedure is applied before preprocessing.
-For validation batch - only the preprocessing procedure is applied. 
+- For training batch: random augmentation procedure is applied before preprocessing.
+- For validation batch: only the preprocessing procedure is applied. 
 
 --------------------------------------
 **CNN model created for training**
