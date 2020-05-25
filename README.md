@@ -13,12 +13,18 @@ Download the [Udacity's self driving car simulator](https://github.com/udacity/s
 $ cd path_to_simulator/
 $ ./Default\ Linux\ desktop\ Universal.x86_64
 ```
-- Choose the resolution and graphics quality. I've kept 640x480 resolution with fastest graphics quality for speedier operation. Press 'OK' once done.
+Choose the resolution and graphics quality. I've kept 640x480 resolution with fastest graphics quality for speedier operation. Press 'OK' once done.
+
 ![choose resolution](images/choose_resolution.png)
-- You'll be able to see the simulator as shown below in case you're using **Version 1** simulator.
+
+You'll be able to see the simulator as shown below in case you're using **Version 1** simulator.
+
 ![simulator](images/simulator.png)
-- Choose the track and click on training mode to start recording training data. I've collected training images only from the sunny track. No training images were collected from the darker track.
+
+Choose the track and click on training mode to start recording training data. I've collected training images only from the sunny track. No training images were collected from the darker track.
+
 ![sunny track](sunny_track_training.png)
+
 - Click on record, provide the path to the folder for storing data and click on select. 
 - To move the car use keys
   - Arrow Up: accelerate 
@@ -34,9 +40,11 @@ $ ./Default\ Linux\ desktop\ Universal.x86_64
 Run the 'steering_angle_dnn.ipynb' in jupyter notebook. You can use [google-colab](https://colab.research.google.com) to train the model in case you don't have gpu in your computer.
 
 List showing the center, left, right image names with steering, throttle, reverse and speed values for the top 5 data from the 'driving_log.csv' file.
-![top data](images/data_head_png)
+
+![top data](images/data_head.png)
 
 Plotting the distribution of training samples vs the steering values we find that we have lot of training data for steering value around 0.0. This is because we have a lot straight road track.
+
 ![distribution of training samples](images/histogram_images_vs_steering_anlges.png)
 
 Although we would like to drive the car without any turns on straight road but we don't want the model to be too biased for driving straight. Hence, we truncate the number of samples to 400 samples for steering values aroung 0.0.
@@ -86,6 +94,7 @@ Model is trained for 10 epochs using batch generator with 100 training images pe
 ![training result](images/training_fit_gen.png)
 
 Plot of loss curve for training and validation data
+
 ![plot loss curve](images/plot_loss_curve.png)
 
 --------------------------------------
