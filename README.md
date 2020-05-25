@@ -23,7 +23,7 @@ You'll be able to see the simulator as shown below in case you're using **Versio
 
 Choose the track and click on training mode to start recording training data. I've collected training images only from the sunny track. No training images were collected from the darker track.
 
-![sunny track](sunny_track_training.png)
+![sunny track](images/sunny_track_training.png)
 
 - Click on record, provide the path to the folder for storing data and click on select. 
 - To move the car use keys
@@ -114,4 +114,4 @@ $ ./Default\ Linux\ desktop\ Universal.x86_64
 ```
 
 You can check out the result on driving on both sunny track and dark track with the model in the video.
-[![Watch the video](images/autonomous_driving.png)](https://youtu.be/ozstXJIiAoA)
+[![Watch the video](images/autonomous_driving2.png)](https://youtu.be/ozstXJIiAoA)
