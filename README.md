@@ -1,12 +1,13 @@
 # autonomous_car_driving 
-This repository describes procedure for:
+**This repository describes procedure for:**
 - downloading Udacity's self driving car simulator.
 - launching the car simulator and creating the training dataset.
-- codes for cleaning and preprocessing of the training images.
+- codes for cleaning the dataset and preprocessing of the training images.
 - creation and training of CNN model for predicting steering angles.
 - running a Flask server to fetch the image from the simulator, predict the steering angle and send the steering angle to the simulator.
 
 --------------------------------------
+**Simulator and Collection of Training Dataset**
 Download the [Udacity's self driving car simulator](https://github.com/udacity/self-driving-car-sim) and create the training dataset. I've made use of **Version 1** of the simulator for Linux operating system.
 - Extract the files locally. Launch the simulator with command
 ```
@@ -37,33 +38,36 @@ Choose the track and click on training mode to start recording training data. I'
   - file 'driving_log.csv' consisting of steering, throttle, reverse and speed for each set of images.
 
 --------------------------------------
-Run the 'steering_angle_dnn.ipynb' in jupyter notebook. You can use [google-colab](https://colab.research.google.com) to train the model in case you don't have gpu in your computer.
+**Run the 'steering_angle_dnn.ipynb' in jupyter notebook**
+- You can use [google-colab](https://colab.research.google.com) to train the model in case you don't have gpu in your computer.
 
 List showing the center, left, right image names with steering, throttle, reverse and speed values for the top 5 data from the 'driving_log.csv' file.
 
 ![top data](images/data_head.png)
 
-Plotting the distribution of training samples vs the steering values we find that we have lot of training data for steering value around 0.0. This is because we have a lot straight road track.
+Plotting the distribution of training samples vs the steering values I found that there were many samples for steering value around 0.0. This is because due lot of straight road track.
 
 ![distribution of training samples](images/histogram_images_vs_steering_anlges.png)
 
-Although we would like to drive the car without any turns on straight road but we don't want the model to be too biased for driving straight. Hence, we truncate the number of samples to 400 samples for steering values aroung 0.0.
+Although its required to drive the car without any turns on straight road, but the model shouldn't be too biased for driving straight. Hence, I truncated the number of samples to 400 samples for steering values aroung 0.0.
 ![truncate training samples](images/truncated_histogram.png)
 
 The dataset is split into ratio of 80:20 as training and validation dataset. Distribution of samples in training and validation dataset after the split.
 ![train and validation distribution](images/Distribution_training_validation.png)
 
-[imgaug library](https://imgaug.readthedocs.io/en/latest/) is used for augmentation of the training data with brightness variation, translation along horizontal and vertical direction, horizontal flipping and zooming of images. Below shows results of augmentation applied on random images.
+[imgaug library](https://imgaug.readthedocs.io/en/latest/) is used for augmentation of the training data with brightness variation, translation along horizontal and vertical direction, horizontal flipping and zooming of images. Below shows results of augmentation applied on random images. Augmenting the data for brightness changes will enable us to train model to drive on the darker track.
 ![random augmentation](images/Random_augmentation.png)
 
 Preprocessing of images is carried out by first cropping the image so that only the road is visible, converting the image from RGB to YUV color space and applying gaussian blur operation to smoothen the image. Experimental results on other machine vision applications show that YUV color space provide better results compared to RGB color space due to its perceptual similarities to
-the human vision. Hence, we training the model with YUV images.
+the human vision. Hence, I've trained the model with YUV images.
 ![preprocessing](images/preprocess_image.png)
 
-Batch generator functions is defined to generate the required number of training/validation samples for each batch. For training batch random augmentation procedure is applied before preprocessing and for validation batch only the preprocessing procedure is applied. 
+Batch generator functions is defined to generate the required number of training/validation samples for each batch. 
+For training batch - random augmentation procedure is applied before preprocessing.
+For validation batch - only the preprocessing procedure is applied. 
 
 --------------------------------------
-CNN model created for training
+**CNN model created for training**
 - Convolutional layer with 24 filters with kernel size (5,5) and strides (2,2)
 - elu activation layer
 - Convolutional layer with 36 filters with kernel size (5,5) and strides (2,2)
@@ -89,7 +93,11 @@ CNN model created for training
 ![model](images/model.png)
 
 --------------------------------------
-Model is trained for 10 epochs using batch generator with 100 training images per batch and 100 validation images per batch. Per epoch 300 batches of training is carried out, while in 200 validation steps is carried out after each epoch. Took about 25mins of training time.
+**Training Process**
+- Model is trained for 10 epochs with 300 training steps per epoch followed by 200 validation steps. 
+- Each training batch consists of 100 training images.
+- Each validation step consists of 100 validation images. 
+- Required around 25 mins of training time.
 
 ![training result](images/training_fit_gen.png)
 
@@ -98,7 +106,10 @@ Plot of loss curve for training and validation data
 ![plot loss curve](images/plot_loss_curve.png)
 
 --------------------------------------
-The trained model is saved locally. Use the drive.py to load the trained model, connect to the simulator, obtain the telemetry data, pass the images through the model and send the steering angle to simulator. The throttle is calculated so as to maintain a constant speed of 20.
+**Testing of autonomous driving on test track**
+- The trained model is saved locally. 
+- File drive.py is used to load the trained model, connect to the simulator, obtain the telemetry data, pass the images through the model and send the steering angle to simulator. 
+- The throttle value is calculated so as to maintain a constant speed of 20.
 
 Install
 ```
@@ -113,5 +124,6 @@ $ cd path_to_simulator/
 $ ./Default\ Linux\ desktop\ Universal.x86_64
 ```
 
-You can check out the result on driving on both sunny track and dark track with the model in the video.
+--------------------------------------
+**Watch Autonomous Drive Video on Both Tracks**
 [![Watch the video](images/autonomous_driving2.png)](https://youtu.be/ozstXJIiAoA)
