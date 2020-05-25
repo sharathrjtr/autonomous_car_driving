@@ -114,7 +114,7 @@ Plot of loss curve for training and validation data
 **Testing of autonomous driving on test track**
 - The trained model is saved locally. 
 - File **drive.py** is used to load the trained model, connect to the simulator, obtain the telemetry data, pass the images through the model and send the steering angle to simulator. 
-- The throttle value is calculated so as to maintain a constant speed of 20.
+- The throttle value is calculated so as to limit the car speed to 20.
 
 Install
 ```
