@@ -8,7 +8,7 @@
 
 --------------------------------------
 **Simulator and Collection of Training Dataset**
-Download the [Udacity's self driving car simulator](https://github.com/udacity/self-driving-car-sim) and create the training dataset. I've made use of **Version 1** of the simulator for Linux operating system.
+- Download the [Udacity's self driving car simulator](https://github.com/udacity/self-driving-car-sim) and create the training dataset. I've made use of **Version 1** of the simulator for Linux operating system.
 - Extract the files locally. Launch the simulator with command
 ```
 $ cd path_to_simulator/
@@ -34,14 +34,14 @@ Choose the track and click on training mode to start recording training data. I'
   - Arrow left: turn left
 - Collect the data by driving on both directions of the track with one lap in each direction. This will ensure that you'll have enough images for right and left turns. You can pause the record when you want to switch the direction of car on the track.
 - After recording you'll see 
-  - folder 'IMG' with all training images from left, right and center camera of the car.
-  - file 'driving_log.csv' consisting of steering, throttle, reverse and speed for each set of images.
+  - folder **'IMG'** with all training images from left, right and center camera of the car.
+  - file **'driving_log.csv'** consisting of steering, throttle, reverse and speed for each set of images.
 
 --------------------------------------
 **Run the 'steering_angle_dnn.ipynb' in jupyter notebook**
 - You can use [google-colab](https://colab.research.google.com) to train the model in case you don't have gpu in your computer.
 
-List showing the center, left, right image names with steering, throttle, reverse and speed values for the top 5 data from the 'driving_log.csv' file.
+List showing the center, left, right image names with steering, throttle, reverse and speed values for the top 5 data from the **'driving_log.csv'** file.
 
 ![top data](images/data_head.png)
 
@@ -108,7 +108,7 @@ Plot of loss curve for training and validation data
 --------------------------------------
 **Testing of autonomous driving on test track**
 - The trained model is saved locally. 
-- File drive.py is used to load the trained model, connect to the simulator, obtain the telemetry data, pass the images through the model and send the steering angle to simulator. 
+- File **drive.py** is used to load the trained model, connect to the simulator, obtain the telemetry data, pass the images through the model and send the steering angle to simulator. 
 - The throttle value is calculated so as to maintain a constant speed of 20.
 
 Install
