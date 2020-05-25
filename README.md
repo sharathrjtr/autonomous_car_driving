@@ -45,7 +45,7 @@ List showing the center, left, right image names with steering, throttle, revers
 
 ![top data](images/data_head.png)
 
-Plotting the distribution of training samples vs the steering values I found that there were many samples for steering value around 0.0. This is because due lot of straight road track.
+Plotting the distribution of training samples vs the steering values I found that there were many samples for steering value around 0.0. This was due lot of straight road track.
 
 ![distribution of training samples](images/histogram_images_vs_steering_anlges.png)
 
@@ -58,7 +58,12 @@ The dataset is split into ratio of 80:20 as training and validation dataset. Dis
 [imgaug library](https://imgaug.readthedocs.io/en/latest/) is used for augmentation of the training data with brightness variation, translation along horizontal and vertical direction, horizontal flipping and zooming of images. Below shows results of augmentation applied on random images. Augmenting the data for brightness changes will enable us to train model to drive on the darker track.
 ![random augmentation](images/Random_augmentation.png)
 
-Preprocessing of images is carried out by first cropping the image so that only the road is visible, converting the image from RGB to YUV color space and applying gaussian blur operation to smoothen the image. Experimental results on other machine vision applications show that YUV color space provide better results compared to RGB color space due to its perceptual similarities to
+Preprocessing of images is carried out by 
+- first cropping the image so that only the road is visible
+- converting the image from RGB to YUV color space
+- applying gaussian blur operation to smoothen the image
+- Normalize the pixel values to range of 0-1
+Experimental results on other machine vision applications show that YUV color space provide better results compared to RGB color space due to its perceptual similarities to
 the human vision. Hence, I've trained the model with YUV images.
 ![preprocessing](images/preprocess_image.png)
 
@@ -89,7 +94,7 @@ For validation batch - only the preprocessing procedure is applied.
 - elu activation layer
 - Adam optimizer with learning rate=0.001 is used for updating the model parameters.
 - Mean square error is used for loss measurement.
-
+- Exponential Linear Unit(ELU) activation is used as it is required to retain the negative logits in the model to generate negative values as well in the output layer.
 ![model](images/model.png)
 
 --------------------------------------
